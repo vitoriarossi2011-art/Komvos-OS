@@ -13,7 +13,7 @@
 
 @layer base {
   body {
-    @apply font-sans text-grafite-texto overflow-hidden selection:bg-brand-purple/20;
+    @apply font-sans text-grafite-texto dark:text-slate-200 overflow-hidden selection:bg-brand-purple/20 transition-colors duration-300;
     background: url('https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=1974&auto=format&fit=crop');
     background-size: cover;
     background-position: center;
@@ -27,6 +27,6 @@
   }
   
   .dock-item {
-    @apply w-12 h-12 rounded-xl bg-white border border-cinza-claro/20 shadow-sm flex items-center justify-center text-grafite-texto hover:text-brand-purple transition-colors duration-200;
+    @apply w-12 h-12 rounded-xl bg-white dark:bg-slate-800 border border-cinza-claro/20 dark:border-white/10 shadow-sm flex items-center justify-center text-grafite-texto dark:text-slate-200 hover:text-brand-purple transition-colors duration-200;
   }
 }
