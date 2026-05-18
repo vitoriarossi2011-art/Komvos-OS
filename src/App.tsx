@@ -43,13 +43,13 @@ import {
 } from 'lucide-react';
 
 const WeatherWidget = () => (
-  <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-2xl border border-white/20 dark:border-white/10 shadow-lg p-6 flex items-center justify-between pointer-events-auto w-full h-full">
+  <div className="bg-white/80 dark:bg-slate-900/90 backdrop-blur-md rounded-2xl border border-white/20 dark:border-white/10 shadow-lg p-6 flex items-center justify-between pointer-events-auto w-full h-full">
     <div className="flex flex-col">
-      <span className="text-sm font-bold text-grafite-texto dark:text-slate-300 opacity-50 uppercase tracking-wider">São Paulo</span>
+      <span className="text-sm font-bold text-grafite-texto dark:text-slate-400 opacity-50 uppercase tracking-wider">São Paulo</span>
       <span className="text-4xl font-bold text-grafite-texto dark:text-slate-100">24°C</span>
-      <span className="text-xs font-medium text-on-surface-variant opacity-70">Parcialmente Nublado</span>
+      <span className="text-xs font-medium text-on-surface-variant dark:text-slate-500 opacity-70">Parcialmente Nublado</span>
     </div>
-    <div className="p-4 bg-yellow-400/10 rounded-full">
+    <div className="p-4 bg-yellow-400/10 dark:bg-yellow-400/20 rounded-full">
       <CloudSun className="w-12 h-12 text-yellow-500" />
     </div>
   </div>
@@ -59,15 +59,15 @@ const NotepadWidget = () => {
   const [note, setNote] = useState('Minhas notas rápidas...\n\n- Preparar apresentação\n- Ligar para fornecedor');
   
   return (
-    <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-2xl border border-white/20 dark:border-white/10 shadow-lg p-6 flex flex-col pointer-events-auto w-full h-full">
+    <div className="bg-white/80 dark:bg-slate-900/90 backdrop-blur-md rounded-2xl border border-white/20 dark:border-white/10 shadow-lg p-6 flex flex-col pointer-events-auto w-full h-full">
       <div className="flex items-center gap-2 mb-3">
         <StickyNote className="w-4 h-4 text-brand-purple" />
-        <h3 className="text-sm font-bold text-grafite-texto dark:text-slate-100">Bloco de Notas</h3>
+        <h3 className="text-sm font-bold text-grafite-texto dark:text-slate-200">Bloco de Notas</h3>
       </div>
       <textarea 
         value={note}
         onChange={(e) => setNote(e.target.value)}
-        className="flex-1 bg-transparent border-none focus:ring-0 text-sm font-medium text-grafite-texto dark:text-slate-200 resize-none placeholder-gray-400"
+        className="flex-1 bg-transparent border-none focus:ring-0 text-sm font-medium text-grafite-texto dark:text-slate-300 resize-none placeholder-gray-400 dark:placeholder-slate-600"
         placeholder="Escreva algo..."
       />
     </div>
@@ -79,22 +79,22 @@ const MiniCalendarWidget = () => {
   const today = new Date().getDate();
   
   return (
-    <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-2xl border border-white/20 dark:border-white/10 shadow-lg p-6 flex flex-col pointer-events-auto w-full h-full">
+    <div className="bg-white/80 dark:bg-slate-900/90 backdrop-blur-md rounded-2xl border border-white/20 dark:border-white/10 shadow-lg p-6 flex flex-col pointer-events-auto w-full h-full">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <CalendarDays className="w-4 h-4 text-brand-purple" />
           <h3 className="text-sm font-bold text-grafite-texto dark:text-slate-100">Outubro</h3>
         </div>
-        <span className="text-[10px] font-bold opacity-40 dark:text-slate-400 uppercase">2024</span>
+        <span className="text-[10px] font-bold opacity-40 dark:text-slate-500 uppercase">2024</span>
       </div>
       <div className="grid grid-cols-7 gap-1 text-center">
         {['D', 'S', 'T', 'Q', 'Q', 'S', 'S'].map((d, i) => (
-          <span key={`${d}-${i}`} className="text-[9px] font-bold text-grafite-texto dark:text-slate-500 opacity-30">{d}</span>
+          <span key={`${d}-${i}`} className="text-[9px] font-bold text-grafite-texto dark:text-slate-600 opacity-30">{d}</span>
         ))}
         {days.map(day => (
           <span 
             key={day} 
-            className={`text-xs font-medium py-1.5 rounded-lg transition-colors ${day === today ? 'bg-brand-purple text-white shadow-md' : 'text-grafite-texto dark:text-slate-300 hover:bg-white/40 dark:hover:bg-white/10'}`}
+            className={`text-xs font-medium py-1.5 rounded-lg transition-colors ${day === today ? 'bg-brand-purple text-white shadow-md' : 'text-grafite-texto dark:text-slate-400 hover:bg-white/40 dark:hover:bg-white/5'}`}
           >
             {day}
           </span>
@@ -111,17 +111,19 @@ const AnnouncementsWidget = () => {
   ];
 
   return (
-    <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-2xl border border-white/20 dark:border-white/10 shadow-lg p-6 flex flex-col pointer-events-auto w-full h-full">
+    <div className="bg-white/80 dark:bg-slate-900/90 backdrop-blur-md rounded-2xl border border-white/20 dark:border-white/10 shadow-lg p-6 flex flex-col pointer-events-auto w-full h-full">
       <div className="flex items-center gap-2 mb-4">
-        <Info className="w-4 h-4 text-red-500" />
+        <span className="p-1 px-1.5 bg-red-500/10 dark:bg-red-500/20 rounded text-red-500">
+          <Info className="w-3 h-3" />
+        </span>
         <h3 className="text-sm font-bold text-grafite-texto dark:text-slate-100">Comunicados</h3>
       </div>
       <div className="space-y-3">
         {announcements.map(a => (
-          <div key={a.id} className="p-3 bg-white/40 dark:bg-white/5 rounded-xl border border-white/10 dark:border-white/5 hover:border-brand-purple/20 transition-all cursor-pointer">
+          <div key={a.id} className="p-3 bg-white/40 dark:bg-white/5 rounded-xl border border-white/10 dark:border-white/10 hover:border-brand-purple/20 transition-all cursor-pointer">
             <h4 className="text-xs font-bold text-grafite-texto dark:text-slate-200">{a.title}</h4>
             <div className="flex justify-between items-center mt-2">
-              <span className="text-[9px] text-on-surface-variant dark:text-slate-400 opacity-60 font-medium">{a.time}</span>
+              <span className="text-[9px] text-on-surface-variant dark:text-slate-500 opacity-60 font-medium">{a.time}</span>
               <span className={`text-[8px] font-bold px-1.5 py-0.5 rounded ${a.priority === 'Alta' ? 'bg-red-500/10 text-red-500' : 'bg-blue-500/10 text-blue-500'}`}>{a.priority}</span>
             </div>
           </div>
@@ -375,11 +377,17 @@ const TopBar = ({
   isDarkMode: boolean,
   isNotificationsOpen: boolean
 }) => (
-  <header className="fixed top-0 left-0 right-0 bg-white/20 dark:bg-slate-900/20 backdrop-blur-xl border-b border-white/10 dark:border-white/5 z-50">
+  <header className="fixed top-0 left-0 right-0 bg-white/20 dark:bg-slate-900/60 backdrop-blur-xl border-b border-white/10 dark:border-white/20 z-50">
     <div className="flex justify-between items-center w-full px-8 py-2">
       <Logo />
       <div className="flex items-center gap-4">
-        <IconButton onClick={onToggleDarkMode} icon={isDarkMode ? <Sun className="w-5 h-5 text-yellow-400" /> : <Moon className="w-5 h-5 opacity-70" />} />
+        <IconButton 
+          onClick={onToggleDarkMode} 
+          icon={isDarkMode 
+            ? <Sun className="w-5 h-5 text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.4)]" /> 
+            : <Moon className="w-5 h-5 opacity-70 text-slate-600" />
+          } 
+        />
         <IconButton onClick={onOpenSettings} icon={<Settings className="w-5 h-5 opacity-70" />} />
         <IconButton onClick={onOpenHelp} icon={<HelpCircle className="w-5 h-5 opacity-70" />} />
         <div className="relative">
@@ -420,7 +428,7 @@ const TopBar = ({
 const IconButton = ({ icon, onClick }: { icon: React.ReactNode, onClick?: () => void }) => (
   <button 
     onClick={onClick}
-    className="p-2 text-grafite-texto dark:text-slate-200 hover:bg-white/10 dark:hover:bg-white/5 rounded-full transition-all duration-200 active:scale-90 flex items-center justify-center"
+    className="p-2 text-grafite-texto dark:text-slate-200 hover:bg-black/5 dark:hover:bg-white/10 rounded-full transition-all duration-200 active:scale-90 flex items-center justify-center"
   >
     {icon}
   </button>
@@ -457,7 +465,7 @@ const TasksWidget = () => {
   };
 
   return (
-    <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-2xl border border-white/20 dark:border-white/10 shadow-lg p-6 pointer-events-auto w-full h-full flex flex-col">
+    <div className="bg-white/80 dark:bg-slate-900/90 backdrop-blur-md rounded-2xl border border-white/20 dark:border-white/10 shadow-lg p-6 pointer-events-auto w-full h-full flex flex-col">
       <h3 className="text-sm font-bold text-grafite-texto dark:text-slate-100 mb-4">Tarefas</h3>
       <div className="flex-1 overflow-y-auto space-y-2">
         {tasks.map(task => (
@@ -469,9 +477,9 @@ const TasksWidget = () => {
             {task.completed ? (
               <CheckCircle2 className="w-5 h-5 text-brand-purple" />
             ) : (
-              <Circle className="w-5 h-5 text-cinza-claro group-hover:text-brand-purple transition-colors" />
+              <Circle className="w-5 h-5 text-cinza-claro dark:text-slate-600 group-hover:text-brand-purple transition-colors" />
             )}
-            <span className={`text-sm ${task.completed ? 'text-on-surface-variant dark:text-slate-500 line-through opacity-50' : 'text-grafite-texto dark:text-slate-300 font-medium'}`}>
+            <span className={`text-sm ${task.completed ? 'text-on-surface-variant dark:text-slate-600 line-through opacity-50' : 'text-grafite-texto dark:text-slate-300 font-medium'}`}>
               {task.text}
             </span>
           </div>
@@ -488,18 +496,18 @@ const ProjectsWidget = () => {
   ];
 
   return (
-    <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md rounded-2xl border border-white/20 dark:border-white/10 shadow-lg p-6 pointer-events-auto w-full h-full flex flex-col">
+    <div className="bg-white/80 dark:bg-slate-900/90 backdrop-blur-md rounded-2xl border border-white/20 dark:border-white/10 shadow-lg p-6 pointer-events-auto w-full h-full flex flex-col">
       <h3 className="text-sm font-bold text-grafite-texto dark:text-slate-100 mb-4">Projetos</h3>
       <div className="flex-1 overflow-y-auto space-y-3">
         {projects.map(p => (
           <div key={p.id} className="flex items-center justify-between p-2 hover:bg-white/40 dark:hover:bg-white/5 rounded-lg transition-colors cursor-pointer group">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-brand-purple/10 text-brand-purple rounded-lg group-hover:bg-brand-purple group-hover:text-white transition-colors">
+              <div className="p-2 bg-brand-purple/10 dark:bg-brand-purple/20 text-brand-purple rounded-lg group-hover:bg-brand-purple group-hover:text-white transition-colors">
                 {p.icon}
               </div>
               <span className="text-sm font-medium text-grafite-texto dark:text-slate-300">{p.title}</span>
             </div>
-            <span className="text-[10px] font-bold text-brand-purple opacity-70">{p.status}</span>
+            <span className="text-[10px] font-bold text-brand-purple opacity-70 group-hover:opacity-100 transition-opacity">{p.status}</span>
           </div>
         ))}
       </div>
@@ -537,7 +545,7 @@ const Dock = ({
       <motion.div 
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="bg-white/70 dark:bg-slate-900/70 backdrop-blur-2xl rounded-xl px-2 py-1.5 flex items-center gap-1 shadow-[0_8px_32px_rgba(0,0,0,0.12)] border border-white/30 dark:border-white/5"
+        className="bg-white/70 dark:bg-slate-900/90 backdrop-blur-2xl rounded-xl px-2 py-1.5 flex items-center gap-1 shadow-[0_8px_32px_rgba(0,0,0,0.12)] border border-white/30 dark:border-white/10"
       >
         {dockItems.map((item, idx) => (
           item.divider ? (
@@ -604,11 +612,14 @@ const ContextMenu = ({ x, y, onClose, onOpenPersonalize }: { x: number, y: numbe
     <motion.div 
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
-      className="fixed z-[100] bg-white/90 dark:bg-slate-900/90 backdrop-blur-md rounded-xl border border-cinza-claro/20 dark:border-white/10 shadow-xl py-2 w-56 flex flex-col pointer-events-auto"
+      className="fixed z-[100] bg-white/90 dark:bg-slate-900/95 backdrop-blur-xl rounded-2xl border border-black/5 dark:border-white/10 shadow-2xl py-3 w-64 flex flex-col pointer-events-auto"
       style={{ top: y, left: x }}
     >
+      <div className="px-4 py-1.5 mb-2 border-b border-black/5 dark:border-white/5">
+        <span className="text-[10px] font-bold text-grafite-texto/30 dark:text-slate-500 uppercase tracking-widest leading-none">Área de Trabalho</span>
+      </div>
       <ContextMenuItem icon={<Palette className="w-4 h-4" />} label="Personalizar" onClick={() => { onOpenPersonalize(); onClose(); }} />
-      <div className="h-px bg-cinza-claro/10 mx-2 my-1" />
+      <div className="h-px bg-black/[0.03] dark:bg-white/5 mx-3 my-2" />
       <ContextMenuItem label="Novo Arquivo" disabled />
       <ContextMenuItem label="Organizar Desktop" disabled />
     </motion.div>
@@ -619,9 +630,11 @@ const ContextMenuItem = ({ icon, label, onClick, disabled }: { icon?: React.Reac
   <button 
     disabled={disabled}
     onClick={onClick}
-    className={`flex items-center gap-3 px-4 py-2 hover:bg-brand-purple/10 transition-colors text-sm font-medium ${disabled ? 'opacity-40 cursor-default' : 'text-grafite-texto dark:text-slate-200'}`}
+    className={`flex items-center gap-3 px-4 py-2 hover:bg-brand-purple hover:text-white transition-all text-[13px] font-bold tracking-tight rounded-lg mx-2 ${
+      disabled ? 'opacity-30 cursor-default' : 'text-grafite-texto dark:text-slate-300'
+    }`}
   >
-    {icon}
+    <span className="opacity-70 group-hover:opacity-100">{icon}</span>
     <span>{label}</span>
   </button>
 );
@@ -629,9 +642,13 @@ const ContextMenuItem = ({ icon, label, onClick, disabled }: { icon?: React.Reac
 const TabButton = ({ active, icon, label, onClick }: { active: boolean, icon: React.ReactNode, label: string, onClick: () => void, key?: React.Key }) => (
   <button 
     onClick={onClick}
-    className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all font-medium text-sm ${active ? 'bg-brand-purple text-white shadow-md shadow-brand-purple/20' : 'text-grafite-texto dark:text-slate-300 hover:bg-cinza-claro/10 dark:hover:bg-white/5'}`}
+    className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all font-medium text-sm ${
+      active 
+        ? 'bg-brand-purple text-white shadow-md shadow-brand-purple/20' 
+        : 'text-grafite-texto dark:text-slate-300 hover:bg-cinza-claro/10 dark:hover:bg-white/5'
+    }`}
   >
-    {icon}
+    <span className={active ? 'text-white' : 'text-brand-purple'}>{icon}</span>
     <span>{label}</span>
   </button>
 );
@@ -645,22 +662,22 @@ const AdminUsersView = () => {
 
   return (
     <div className="bg-white dark:bg-slate-900 rounded-[32px] border border-black/5 dark:border-white/10 overflow-hidden shadow-sm">
-      <div className="p-6 border-b border-black/5 dark:border-white/5 flex justify-between items-center bg-[#F9FAFB]/50 dark:bg-black/20">
+      <div className="p-6 border-b border-black/5 dark:border-white/10 flex justify-between items-center bg-[#F9FAFB]/50 dark:bg-slate-800/50 backdrop-blur-md">
         <h3 className="font-bold text-grafite-texto dark:text-slate-100">Lista de Usuários</h3>
         <button className="bg-brand-purple text-white px-4 py-2 rounded-xl text-xs font-bold shadow-lg shadow-brand-purple/20 hover:scale-105 active:scale-95 transition-all">
           + Convidar Usuário
         </button>
       </div>
-      <div className="divide-y divide-black/5 dark:divide-white/5">
+      <div className="divide-y divide-black/5 dark:divide-white/10">
         {users.map(u => (
-          <div key={u.id} className="p-4 flex items-center justify-between hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer group">
+          <div key={u.id} className="p-4 flex items-center justify-between hover:bg-black/5 dark:hover:bg-white/[0.03] transition-colors cursor-pointer group">
             <div className="flex items-center gap-4">
-              <div className="w-10 h-10 bg-cinza-claro/20 dark:bg-white/10 rounded-xl flex items-center justify-center font-bold text-grafite-texto/50 dark:text-slate-400 text-xs">
+              <div className="w-10 h-10 bg-cinza-claro/20 dark:bg-slate-800 rounded-xl flex items-center justify-center font-bold text-grafite-texto/50 dark:text-slate-400 text-xs">
                 {u.name.split(' ').map(n => n[0]).join('')}
               </div>
               <div>
                 <p className="text-sm font-bold text-grafite-texto dark:text-slate-200">{u.name}</p>
-                <p className="text-[10px] text-grafite-texto/50 dark:text-slate-400">{u.email}</p>
+                <p className="text-[10px] text-grafite-texto/50 dark:text-slate-500 font-medium">{u.email}</p>
               </div>
             </div>
             <div className="flex items-center gap-8">
@@ -783,14 +800,18 @@ const PersonalizationWindowContent = ({
   onToggleShortcut,
   widgets,
   shortcuts,
-  currentWallpaper 
+  currentWallpaper,
+  isDarkMode,
+  onToggleDarkMode
 }: { 
   onSetWallpaper: (url: string) => void, 
   onToggleWidget: (id: string) => void,
   onToggleShortcut: (id: string) => void,
   widgets: WidgetConfig[],
   shortcuts: ShortcutConfig[],
-  currentWallpaper: string
+  currentWallpaper: string,
+  isDarkMode: boolean,
+  onToggleDarkMode: () => void
 }) => {
   const [activeTab, setActiveTab] = useState('wallpaper');
 
@@ -818,7 +839,7 @@ const PersonalizationWindowContent = ({
   return (
     <div className="flex flex-1 overflow-hidden">
       {/* Sidebar Navigation */}
-      <div className="w-64 border-r border-black/5 dark:border-white/5 bg-[#F9FAFB] dark:bg-slate-900 flex flex-col p-4 shrink-0">
+      <div className="w-64 border-r border-black/5 dark:border-white/5 bg-[#F9FAFB] dark:bg-slate-900/50 flex flex-col p-4 shrink-0">
         <div className="mb-8 px-2">
           <div className="flex items-center gap-2 mb-1">
             <Settings className="w-4 h-4 text-brand-purple" />
@@ -829,7 +850,7 @@ const PersonalizationWindowContent = ({
 
         <div className="flex-1 space-y-6 overflow-y-auto">
           <div>
-            <p className="px-3 text-[9px] font-bold text-grafite-texto/30 uppercase tracking-tighter mb-2">Geral</p>
+            <p className="px-3 text-[9px] font-bold text-grafite-texto/30 dark:text-slate-600 uppercase tracking-tighter mb-2">Geral</p>
             {menuItems.filter(i => i.section === 'GERAL').map(item => (
               <TabButton 
                 key={item.id} 
@@ -842,7 +863,7 @@ const PersonalizationWindowContent = ({
           </div>
 
           <div>
-            <p className="px-3 text-[9px] font-bold text-grafite-texto/30 uppercase tracking-tighter mb-2">Administrativo</p>
+            <p className="px-3 text-[9px] font-bold text-grafite-texto/30 dark:text-slate-600 uppercase tracking-tighter mb-2">Administrativo</p>
             <div className="space-y-1">
               {menuItems.filter(i => i.section === 'ADMINISTRATIVO').map(item => (
                 <TabButton 
@@ -865,6 +886,30 @@ const PersonalizationWindowContent = ({
             <div>
               <h1 className="text-[32px] font-bold text-grafite-texto dark:text-slate-100 tracking-tight mb-2">Wallpaper</h1>
               <p className="text-sm text-grafite-texto/50 dark:text-slate-400 mb-8 font-medium">Escolha a atmosfera do seu espaço de trabalho.</p>
+              
+              <div className="mb-10 p-6 bg-white dark:bg-slate-900 rounded-[28px] border border-black/5 dark:border-white/10 shadow-sm">
+                <div className="flex items-center justify-between mb-6">
+                  <div>
+                    <h3 className="text-lg font-bold text-grafite-texto dark:text-slate-100">Aparência do Sistema</h3>
+                    <p className="text-xs text-grafite-texto/50 dark:text-slate-400">Escolha entre o modo claro e escuro</p>
+                  </div>
+                  <div className="flex p-1 bg-cinza-claro/20 dark:bg-slate-800 rounded-2xl border border-black/5 dark:border-white/5">
+                    <button 
+                      onClick={() => isDarkMode && onToggleDarkMode()}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${!isDarkMode ? 'bg-white shadow-md text-brand-purple' : 'text-grafite-texto/40'}`}
+                    >
+                      <Sun className="w-3 h-3" /> Claro
+                    </button>
+                    <button 
+                      onClick={() => !isDarkMode && onToggleDarkMode()}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${isDarkMode ? 'bg-brand-purple shadow-md text-white' : 'text-grafite-texto/40'}`}
+                    >
+                      <Moon className="w-3 h-3" /> Escuro
+                    </button>
+                  </div>
+                </div>
+              </div>
+
               <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                 {wallpapers.map((url, i) => (
                   <div 
@@ -1117,7 +1162,7 @@ const ProfileWindowContent = () => {
   return (
     <div className="flex-1 flex flex-col bg-[#F9FAFB] dark:bg-slate-950 overflow-hidden">
       {/* Header Section */}
-      <div className="px-10 py-8 border-b border-black/5 dark:border-white/5 bg-white dark:bg-slate-900">
+      <div className="px-10 py-8 border-b border-black/5 dark:border-white/10 bg-white dark:bg-slate-900/50 backdrop-blur-md">
         <div className="flex justify-between items-start">
           <div>
             <h1 className="text-[32px] font-bold text-grafite-texto dark:text-slate-100 tracking-tight">Preferências do usuário</h1>
@@ -1143,34 +1188,34 @@ const ProfileWindowContent = () => {
               <h2 className="text-xl font-bold text-grafite-texto dark:text-slate-100">Perfil</h2>
               <span className="text-[10px] font-bold text-grafite-texto/40 dark:text-slate-500 uppercase tracking-widest">Imagem Pública</span>
             </div>
-            <p className="text-sm text-grafite-texto/50 dark:text-slate-400 mb-8">Dados que aparecem para outros usuários.</p>
+            <p className="text-sm text-grafite-texto/50 dark:text-slate-400 mb-8 font-medium">Dados que aparecem para outros usuários.</p>
             
-            <div className="bg-[#F8F9FA] dark:bg-slate-800 rounded-3xl border border-black/5 dark:border-white/5 p-12 flex flex-col items-center justify-center text-center mb-8">
-              <div className="w-32 h-32 bg-[#EEF0F2] dark:bg-slate-700 rounded-3xl flex items-center justify-center text-grafite-texto/40 dark:text-slate-400 text-4xl font-bold mb-6">
+            <div className="bg-[#F8F9FA] dark:bg-slate-950/40 rounded-3xl border border-black/5 dark:border-white/10 p-12 flex flex-col items-center justify-center text-center mb-8">
+              <div className="w-32 h-32 bg-[#EEF0F2] dark:bg-slate-800 rounded-3xl flex items-center justify-center text-grafite-texto/40 dark:text-slate-500 text-4xl font-bold mb-6 border border-black/5 dark:border-white/10 shadow-inner">
                 VO
               </div>
-              <h3 className="text-xl font-bold text-grafite-texto dark:text-slate-100 mb-1">Vinicius Otavio</h3>
-              <p className="text-sm text-grafite-texto/50 dark:text-slate-400">vinicius@statum.com.br</p>
+              <h3 className="text-xl font-bold text-grafite-texto dark:text-slate-100 mb-1 tracking-tight">Vinicius Otavio</h3>
+              <p className="text-sm text-grafite-texto/50 dark:text-slate-400 font-medium">vinicius@statum.com.br</p>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
-              <button className="bg-brand-purple/60 hover:bg-brand-purple text-white py-3.5 rounded-xl font-bold text-sm transition-all">
+              <button className="bg-brand-purple/80 hover:bg-brand-purple text-white py-3.5 rounded-xl font-bold text-sm transition-all shadow-lg shadow-brand-purple/20">
                 Adicionar foto
               </button>
               <button className="bg-white dark:bg-slate-800 border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5 text-grafite-texto/50 dark:text-slate-400 py-3.5 rounded-xl font-bold text-sm transition-all">
                 Remover
               </button>
             </div>
-            <p className="text-[10px] text-center text-grafite-texto/30 dark:text-slate-600 mt-4">JPG, PNG, WEBP ou GIF com até 5 MB</p>
+            <p className="text-[10px] text-center text-grafite-texto/30 dark:text-slate-600 mt-4 font-bold uppercase tracking-widest">JPG, PNG, WEBP ou GIF com até 5 MB</p>
           </div>
 
           {/* Right Card: Dados e preferências */}
           <div className="lg:col-span-7 bg-white dark:bg-slate-900 rounded-[32px] border border-black/5 dark:border-white/10 p-8 shadow-sm">
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-bold text-grafite-texto dark:text-slate-100 max-w-[200px] leading-tight">Dados e preferências</h2>
+              <h2 className="text-xl font-bold text-grafite-texto dark:text-slate-100 max-w-[200px] leading-tight tracking-tight">Dados e preferências</h2>
               <span className="text-[10px] font-bold text-grafite-texto/40 dark:text-slate-500 uppercase tracking-widest text-right">Aplicado ao entrar na plataforma</span>
             </div>
-            <p className="text-sm text-grafite-texto/50 dark:text-slate-400 mb-8">Identidade operacional, tema e vínculo principal.</p>
+            <p className="text-sm text-grafite-texto/50 dark:text-slate-400 mb-8 font-medium">Identidade operacional, tema e vínculo principal.</p>
 
             <div className="space-y-6">
               <div>
@@ -1218,8 +1263,8 @@ const ProfileWindowContent = () => {
               </div>
 
               <div>
-                <div className="inline-flex items-center px-4 py-2 bg-white dark:bg-slate-800 border border-black/10 dark:border-white/10 rounded-full text-[11px] font-bold text-grafite-texto/70 dark:text-slate-300 mt-4">
-                  Time: <span className="text-grafite-texto dark:text-brand-purple ml-1">Sem time definido</span>
+                <div className="inline-flex items-center px-4 py-2 bg-white dark:bg-slate-800 border border-black/10 dark:border-white/10 rounded-full text-[11px] font-bold text-grafite-texto/70 dark:text-slate-400 mt-4 transition-colors">
+                  Time Ativo: <span className="text-brand-purple ml-1">Nenhum</span>
                 </div>
               </div>
             </div>
@@ -1355,25 +1400,25 @@ const HelpWindowContent = () => {
   return (
     <div className="flex-1 flex overflow-hidden bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">
       {/* Sidebar */}
-      <div className="w-64 border-r border-black/5 dark:border-white/5 bg-[#F9FAFB] dark:bg-slate-950 flex flex-col p-6 gap-2">
+      <div className="w-64 border-r border-black/5 dark:border-white/5 bg-[#F9FAFB] dark:bg-slate-900 flex flex-col p-6 gap-2 shrink-0">
         <button 
           onClick={() => setActiveTab('faq')}
-          className={`flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all font-bold text-xs uppercase tracking-widest ${activeTab === 'faq' ? 'bg-brand-purple text-white shadow-md shadow-brand-purple/20' : 'text-grafite-texto/50 dark:text-slate-400 hover:bg-black/5 dark:hover:bg-white/5'}`}
+          className={`flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all font-bold text-xs uppercase tracking-widest ${activeTab === 'faq' ? 'bg-brand-purple text-white shadow-md shadow-brand-purple/20' : 'text-grafite-texto/50 dark:text-slate-500 hover:text-grafite-texto dark:hover:text-slate-200 hover:bg-black/5 dark:hover:bg-white/5'}`}
         >
           <BookOpen className="w-4 h-4" />
           <span>Central de Ajuda</span>
         </button>
         <button 
           onClick={() => setActiveTab('suggestions')}
-          className={`flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all font-bold text-xs uppercase tracking-widest ${activeTab === 'suggestions' ? 'bg-brand-purple text-white shadow-md shadow-brand-purple/20' : 'text-grafite-texto/50 dark:text-slate-400 hover:bg-black/5 dark:hover:bg-white/5'}`}
+          className={`flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all font-bold text-xs uppercase tracking-widest ${activeTab === 'suggestions' ? 'bg-brand-purple text-white shadow-md shadow-brand-purple/20' : 'text-grafite-texto/50 dark:text-slate-500 hover:text-grafite-texto dark:hover:text-slate-200 hover:bg-black/5 dark:hover:bg-white/5'}`}
         >
           <Megaphone className="w-4 h-4" />
           <span>Sugestões</span>
         </button>
         
-        <div className="mt-auto p-4 bg-white dark:bg-slate-900 rounded-2xl border border-black/5 dark:border-white/10 shadow-sm">
-          <p className="text-[10px] font-bold text-grafite-texto/40 dark:text-slate-500 uppercase mb-2">Suporte Direto</p>
-          <button className="w-full flex items-center justify-center gap-2 py-2 bg-brand-purple/5 text-brand-purple rounded-lg font-bold text-[10px] uppercase hover:bg-brand-purple/10 transition-colors">
+        <div className="mt-auto p-4 bg-white dark:bg-slate-950 rounded-2xl border border-black/5 dark:border-white/10 shadow-sm transition-colors">
+          <p className="text-[10px] font-bold text-grafite-texto/40 dark:text-slate-600 uppercase mb-2">Suporte Direto</p>
+          <button className="w-full flex items-center justify-center gap-2 py-2 bg-brand-purple/5 dark:bg-brand-purple/20 text-brand-purple rounded-lg font-bold text-[10px] uppercase hover:bg-brand-purple hover:text-white transition-all">
             <MessageSquare className="w-3 h-3" />
             Falar com Analista
           </button>
@@ -1381,20 +1426,20 @@ const HelpWindowContent = () => {
       </div>
 
       {/* Content */}
-      <div className="flex-1 overflow-y-auto p-10 bg-white dark:bg-slate-900">
+      <div className="flex-1 overflow-y-auto p-10 bg-white dark:bg-slate-950">
         {activeTab === 'faq' && (
           <div className="max-w-2xl">
-            <h2 className="text-[32px] font-bold text-grafite-texto dark:text-slate-100 tracking-tight mb-2">Como podemos ajudar?</h2>
+            <h2 className="text-[32px] font-bold text-grafite-texto dark:text-slate-100 tracking-tight mb-2 italic tracking-tighter">Como podemos ajudar?</h2>
             <p className="text-sm text-grafite-texto/50 dark:text-slate-400 mb-8 font-medium">Explore nossa base de conhecimento para tirar suas dúvidas.</p>
             
             <div className="space-y-4">
               {faqs.map((faq, index) => (
-                <div key={index} className="p-6 bg-[#F9FAFB] dark:bg-slate-950 rounded-[24px] border border-black/5 dark:border-white/5 hover:border-brand-purple/20 transition-all group">
-                  <h4 className="text-sm font-bold text-grafite-texto dark:text-slate-100 mb-2 flex items-center gap-2">
+                <div key={index} className="p-6 bg-[#F9FAFB] dark:bg-slate-900 rounded-[24px] border border-black/5 dark:border-white/10 hover:border-brand-purple/20 transition-all group">
+                  <h4 className="text-sm font-bold text-grafite-texto dark:text-slate-200 mb-2 flex items-center gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-brand-purple"></span>
                     {faq.q}
                   </h4>
-                  <p className="text-sm text-grafite-texto/60 dark:text-slate-400 leading-relaxed">{faq.a}</p>
+                  <p className="text-sm text-grafite-texto/60 dark:text-slate-400 leading-relaxed font-medium">{faq.a}</p>
                 </div>
               ))}
             </div>
@@ -1403,10 +1448,10 @@ const HelpWindowContent = () => {
 
         {activeTab === 'suggestions' && (
           <div className="max-w-2xl h-full flex flex-col">
-            <h2 className="text-[32px] font-bold text-grafite-texto dark:text-slate-100 tracking-tight mb-2">Sugestões</h2>
-            <p className="text-sm text-grafite-texto/50 dark:text-slate-400 mb-8 font-medium">Sua opinião é fundamental. O que podemos melhorar no Komvos OS?</p>
+            <h2 className="text-[32px] font-bold text-grafite-texto dark:text-slate-100 italic tracking-tighter mb-2">Sugestões</h2>
+            <p className="text-sm text-grafite-texto/50 dark:text-slate-400 mb-8 font-medium">Sua opinião é fundamental para o Komvos OS.</p>
             
-            <div className="flex-1 bg-[#F9FAFB] dark:bg-slate-950 rounded-[32px] border border-black/5 dark:border-white/5 p-8 flex flex-col items-center justify-center text-center">
+            <div className="flex-1 bg-[#F9FAFB] dark:bg-slate-900 rounded-[32px] border border-black/5 dark:border-white/10 p-8 flex flex-col items-center justify-center text-center">
               {sent ? (
                 <motion.div 
                   initial={{ opacity: 0, scale: 0.9 }}
@@ -1417,19 +1462,20 @@ const HelpWindowContent = () => {
                     <Check className="w-8 h-8" />
                   </div>
                   <h3 className="text-xl font-bold text-grafite-texto dark:text-slate-100 mb-2">Obrigado pela sugestão!</h3>
-                  <p className="text-sm text-grafite-texto/50 dark:text-slate-400 font-medium">Nossa equipe de produto irá analisar seu feedback com carinho.</p>
+                  <p className="text-sm text-grafite-texto/50 dark:text-slate-400 font-medium">Nossa equipe de produto irá analisar seu feedback.</p>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSendSuggestion} className="w-full h-full flex flex-col text-slate-900 dark:text-slate-100">
+                <form onSubmit={handleSendSuggestion} className="w-full h-full flex flex-col">
                   <div className="flex-1 relative mb-6">
                     <textarea 
                       value={suggestion}
                       onChange={(e) => setSuggestion(e.target.value)}
                       placeholder="Descreva sua sugestão ou melhoria aqui..."
-                      className="w-full h-full bg-white dark:bg-slate-900 rounded-2xl border border-black/5 dark:border-white/10 p-6 text-sm font-medium placeholder-grafite-texto/20 focus:ring-2 focus:ring-brand-purple/20 focus:border-brand-purple outline-none transition-all resize-none shadow-sm"
+                      className="w-full h-full bg-base-100 dark:bg-slate-800 rounded-2xl border border-black/5 dark:border-white/10 p-6 text-sm font-medium placeholder-grafite-texto/20 focus:ring-2 focus:ring-brand-purple/20 focus:border-brand-purple outline-none transition-all resize-none shadow-sm text-grafite-texto dark:text-slate-100"
                     />
                   </div>
                   <button 
+                    type="submit" 
                     disabled={!suggestion.trim()}
                     className="w-full bg-brand-purple text-white py-4 rounded-2xl font-bold text-xs uppercase tracking-widest shadow-lg shadow-brand-purple/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:hover:scale-100"
                   >
@@ -1456,14 +1502,14 @@ const NotificationsWindowContent = () => {
 
   return (
     <div className="flex flex-col bg-[#F9FAFB] dark:bg-slate-950 overflow-hidden max-h-[500px]">
-      <div className="px-6 py-5 border-b border-black/5 dark:border-white/5 bg-white dark:bg-slate-900">
+      <div className="px-6 py-5 border-b border-black/5 dark:border-white/10 bg-white dark:bg-slate-900/80 backdrop-blur-md">
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-xl font-bold text-grafite-texto dark:text-slate-100 tracking-tight text-brand-purple">Notificações</h1>
-            <p className="text-[10px] text-grafite-texto/50 dark:text-slate-400 mt-0.5 font-bold uppercase tracking-widest">Acompanhe as últimas atualizações</p>
+            <p className="text-[10px] text-grafite-texto/50 dark:text-slate-500 mt-0.5 font-bold uppercase tracking-widest">Atividades recentes</p>
           </div>
           <button className="text-[9px] font-bold text-brand-purple uppercase tracking-widest hover:underline">
-            Limpar
+            Marcar como lidas
           </button>
         </div>
       </div>
@@ -1472,28 +1518,24 @@ const NotificationsWindowContent = () => {
         {notifications.map(n => (
           <div 
             key={n.id} 
-            className={`p-4 rounded-2xl border border-black/5 dark:border-white/10 shadow-sm transition-all flex items-start gap-3 ${n.read ? 'bg-white/50 dark:bg-slate-900/50 opacity-60' : 'bg-white dark:bg-slate-900 border-l-4 border-l-brand-purple'}`}
+            className={`p-4 rounded-3xl border transition-all cursor-pointer group ${
+              n.read 
+                ? 'bg-transparent border-transparent opacity-60' 
+                : 'bg-white dark:bg-slate-900 border-black/5 dark:border-white/10 shadow-sm hover:border-brand-purple/20'
+            }`}
           >
-            <div className={`p-2 rounded-lg shrink-0 ${n.read ? 'bg-black/5 dark:bg-white/5 text-grafite-texto/40 dark:text-slate-500' : 'bg-brand-purple/10 text-brand-purple'}`}>
-              {n.type === 'task' && <CheckCircle2 className="w-4 h-4" />}
-              {n.type === 'system' && <Shield className="w-4 h-4" />}
-              {n.type === 'comment' && <Megaphone className="w-4 h-4" />}
-              {n.type === 'report' && <GitGraph className="w-4 h-4" />}
+            <div className="flex justify-between items-start mb-1">
+              <h4 className="text-sm font-bold text-grafite-texto dark:text-slate-200 group-hover:text-brand-purple transition-colors">{n.title}</h4>
+              <span className="text-[9px] font-bold text-grafite-texto/30 dark:text-slate-600 uppercase italic">{n.time}</span>
             </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex justify-between items-start mb-0.5">
-                <h3 className="text-xs font-bold text-grafite-texto dark:text-slate-100 truncate pr-2">{n.title}</h3>
-                <span className="text-[9px] font-medium text-grafite-texto/40 dark:text-slate-500 shrink-0">{n.time}</span>
-              </div>
-              <p className="text-[11px] text-grafite-texto/60 dark:text-slate-400 leading-relaxed line-clamp-2">{n.message}</p>
-            </div>
+            <p className="text-xs text-grafite-texto/60 dark:text-slate-400 leading-relaxed">{n.message}</p>
           </div>
         ))}
       </div>
-
-      <div className="p-4 bg-white dark:bg-slate-900 border-t border-black/5 dark:border-white/5">
-        <button className="w-full bg-[#F8F9FA] dark:bg-slate-800 hover:bg-black/5 dark:hover:bg-white/5 text-grafite-texto/50 dark:text-slate-500 py-2.5 rounded-xl font-bold text-[10px] transition-all uppercase tracking-widest">
-          Ver Histórico Completo
+      
+      <div className="p-4 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm border-t border-black/5 dark:border-white/10">
+        <button className="w-full py-3 bg-brand-purple/10 dark:bg-brand-purple/20 text-brand-purple rounded-2xl text-[10px] font-bold uppercase tracking-widest hover:bg-brand-purple hover:text-white transition-all">
+          Ver tudo no centro de controle
         </button>
       </div>
     </div>
@@ -1513,6 +1555,14 @@ export default function App() {
   const [helpOpen, setHelpOpen] = useState(false);
   const [helpMinimized, setHelpMinimized] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDarkMode]);
   
   const [shortcuts, setShortcuts] = useState<ShortcutConfig[]>([
     { id: 'monday', name: 'Monday', icon: <Calendar className="w-6 h-6" />, visible: false, x: 1200, y: 50, zIndex: 10 },
@@ -1672,7 +1722,7 @@ export default function App() {
 
   return (
     <div 
-      className={`min-h-screen flex flex-col pt-16 px-8 select-none relative transition-all duration-700 ${isDarkMode ? 'dark' : ''}`} 
+      className={`min-h-screen flex flex-col pt-16 px-8 select-none relative transition-colors duration-700 ${isDarkMode ? 'dark bg-slate-950' : ''}`} 
       style={{ 
         backgroundImage: `url(${wallpaper})`,
         backgroundSize: 'cover',
@@ -1803,6 +1853,8 @@ export default function App() {
               widgets={widgets}
               shortcuts={shortcuts}
               currentWallpaper={wallpaper}
+              isDarkMode={isDarkMode}
+              onToggleDarkMode={() => setIsDarkMode(!isDarkMode)}
             />
           </WindowFrame>
         )}
