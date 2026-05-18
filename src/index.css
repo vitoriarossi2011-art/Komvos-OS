@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #625678;
+  --color-brand-purple: #9184A8;
+  --color-surface: #fbf9f8;
+  --color-grafite-texto: #4A4A4A;
+  --color-cinza-claro: #BFBFBF;
+  
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply font-sans text-grafite-texto overflow-hidden selection:bg-brand-purple/20;
+    background: url('https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=1974&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
+
+@layer components {
+  .glass-window {
+    @apply bg-white/85 backdrop-blur-md border border-cinza-claro/50 shadow-[0_8px_32px_rgba(0,0,0,0.05)];
+  }
+  
+  .dock-item {
+    @apply w-12 h-12 rounded-xl bg-white border border-cinza-claro/20 shadow-sm flex items-center justify-center text-grafite-texto hover:text-brand-purple transition-colors duration-200;
+  }
+}
