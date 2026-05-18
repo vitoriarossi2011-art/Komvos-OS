@@ -42,6 +42,15 @@ import {
   Sun
 } from 'lucide-react';
 
+import { 
+  MondayApp, 
+  RDStationApp, 
+  TreasyApp, 
+  EKyteApp, 
+  MentorWebApp,
+  KomvosMindApp
+} from './SaaSApps';
+
 const WeatherWidget = () => (
   <div className="bg-white/80 dark:bg-slate-900/90 backdrop-blur-md rounded-2xl border border-white/20 dark:border-white/10 shadow-lg p-6 flex items-center justify-between pointer-events-auto w-full h-full">
     <div className="flex flex-col">
@@ -1556,6 +1565,30 @@ export default function App() {
   const [helpMinimized, setHelpMinimized] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
+  const [mondayOpen, setMondayOpen] = useState(false);
+  const [mondayMinimized, setMondayMinimized] = useState(false);
+  const [mondayZ, setMondayZ] = useState(20);
+
+  const [ekyteOpen, setEkyteOpen] = useState(false);
+  const [ekyteMinimized, setEkyteMinimized] = useState(false);
+  const [ekyteZ, setEkyteZ] = useState(21);
+
+  const [rdStationOpen, setRdStationOpen] = useState(false);
+  const [rdStationMinimized, setRdStationMinimized] = useState(false);
+  const [rdStationZ, setRdStationZ] = useState(22);
+
+  const [treasyOpen, setTreasyOpen] = useState(false);
+  const [treasyMinimized, setTreasyMinimized] = useState(false);
+  const [treasyZ, setTreasyZ] = useState(23);
+
+  const [mentorOpen, setMentorOpen] = useState(false);
+  const [mentorMinimized, setMentorMinimized] = useState(false);
+  const [mentorZ, setMentorZ] = useState(24);
+
+  const [mindOpen, setMindOpen] = useState(false);
+  const [mindMinimized, setMindMinimized] = useState(false);
+  const [mindZ, setMindZ] = useState(25);
+
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
@@ -1565,13 +1598,15 @@ export default function App() {
   }, [isDarkMode]);
   
   const [shortcuts, setShortcuts] = useState<ShortcutConfig[]>([
-    { id: 'monday', name: 'Monday', icon: <Calendar className="w-6 h-6" />, visible: false, x: 1200, y: 50, zIndex: 10 },
-    { id: 'ekyte', name: 'Ekyte', icon: <Trello className="w-6 h-6" />, visible: false, x: 1200, y: 160, zIndex: 11 },
-    { id: 'rd_station', name: 'RD Station', icon: <Rocket className="w-6 h-6" />, visible: false, x: 1200, y: 270, zIndex: 12 },
-    { id: 'treasy', name: 'Treasy', icon: <Landmark className="w-6 h-6" />, visible: false, x: 1200, y: 380, zIndex: 13 },
-    { id: 'mentor', name: 'Mentor', icon: <Network className="w-6 h-6" />, visible: false, x: 1200, y: 490, zIndex: 14 },
-    { id: 'rd_crm', name: 'RD CRM', icon: <Contact className="w-6 h-6" />, visible: false, x: 1200, y: 600, zIndex: 15 },
-    { id: 'mind', name: 'Komvos Mind', icon: <Brain className="w-6 h-6" />, visible: false, x: 1300, y: 50, zIndex: 16 },
+    { id: 'personalize', name: 'Personalizar', icon: <Palette className="w-6 h-6" />, visible: true, x: 50, y: 50, zIndex: 1 },
+    { id: 'dashboard', name: 'Dashboard', icon: <LayoutDashboard className="w-6 h-6" />, visible: true, x: 50, y: 160, zIndex: 2 },
+    { id: 'monday', name: 'Monday', icon: <Calendar className="w-6 h-6" />, visible: true, x: 1200, y: 50, zIndex: 10 },
+    { id: 'ekyte', name: 'Ekyte', icon: <Trello className="w-6 h-6" />, visible: true, x: 1200, y: 160, zIndex: 11 },
+    { id: 'rd_station', name: 'RD Station', icon: <Rocket className="w-6 h-6" />, visible: true, x: 1200, y: 270, zIndex: 12 },
+    { id: 'treasy', name: 'Treasy', icon: <Landmark className="w-6 h-6" />, visible: true, x: 1200, y: 380, zIndex: 13 },
+    { id: 'mentor', name: 'Mentor', icon: <Network className="w-6 h-6" />, visible: true, x: 1200, y: 490, zIndex: 14 },
+    { id: 'rd_crm', name: 'RD CRM', icon: <Contact className="w-6 h-6" />, visible: true, x: 1200, y: 600, zIndex: 15 },
+    { id: 'mind', name: 'Komvos Mind', icon: <Brain className="w-6 h-6" />, visible: true, x: 1300, y: 50, zIndex: 16 },
   ]);
   
   const [wallpaper, setWallpaper] = useState('https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=1974&auto=format&fit=crop');
@@ -1613,7 +1648,7 @@ export default function App() {
     setShortcuts(prev => prev.map(s => s.id === id ? { ...s, x, y } : s));
   };
 
-  const focusWindow = (type: 'personalize' | 'dashboard' | 'profile' | 'notifications' | 'help') => {
+  const focusWindow = (type: 'personalize' | 'dashboard' | 'profile' | 'notifications' | 'help' | 'monday' | 'ekyte' | 'rd_station' | 'treasy' | 'mentor' | 'mind') => {
     const nextZ = maxZ + 50;
     setMaxZ(nextZ);
     if (type === 'personalize') setPersonalizeZ(nextZ);
@@ -1621,6 +1656,12 @@ export default function App() {
     else if (type === 'profile') setProfileZ(nextZ);
     else if (type === 'notifications') setNotificationsZ(nextZ);
     else if (type === 'help') setHelpZ(nextZ);
+    else if (type === 'monday') setMondayZ(nextZ);
+    else if (type === 'ekyte') setEkyteZ(nextZ);
+    else if (type === 'rd_station') setRdStationZ(nextZ);
+    else if (type === 'treasy') setTreasyZ(nextZ);
+    else if (type === 'mentor') setMentorZ(nextZ);
+    else if (type === 'mind') setMindZ(nextZ);
   };
 
   const handleDashboardClick = () => {
@@ -1668,6 +1709,52 @@ export default function App() {
     } else {
       setHelpMinimized(!helpMinimized);
       if (helpMinimized) focusWindow('help');
+    }
+  };
+
+  const openApp = (id: string) => {
+    switch (id) {
+      case 'personalize':
+        handleSettingsClick();
+        break;
+      case 'dashboard':
+        handleDashboardClick();
+        break;
+      case 'monday':
+        setMondayOpen(true);
+        setMondayMinimized(false);
+        focusWindow('monday');
+        break;
+      case 'ekyte':
+        setEkyteOpen(true);
+        setEkyteMinimized(false);
+        focusWindow('ekyte');
+        break;
+      case 'rd_station':
+        setRdStationOpen(true);
+        setRdStationMinimized(false);
+        focusWindow('rd_station');
+        break;
+      case 'rd_crm':
+        setRdStationOpen(true);
+        setRdStationMinimized(false);
+        focusWindow('rd_station');
+        break;
+      case 'treasy':
+        setTreasyOpen(true);
+        setTreasyMinimized(false);
+        focusWindow('treasy');
+        break;
+      case 'mentor':
+        setMentorOpen(true);
+        setMentorMinimized(false);
+        focusWindow('mentor');
+        break;
+      case 'mind':
+        setMindOpen(true);
+        setMindMinimized(false);
+        focusWindow('mind');
+        break;
     }
   };
 
@@ -1756,10 +1843,7 @@ export default function App() {
               onUpdate={updateShortcutPos}
               onFocus={focusShortcut}
               onClose={toggleShortcut}
-              onClick={() => {
-                // Determine action based on ID
-                if (s.id === 'monday') {/* Action if needed */}
-              }}
+              onClick={() => openApp(s.id)}
             />
           ))}
         </AnimatePresence>
@@ -1879,6 +1963,110 @@ export default function App() {
       </AnimatePresence>
 
       {/* Notifications Popover is inside TopBar */}
+
+      {/* SaaS Apps Windows */}
+      <AnimatePresence>
+        {mondayOpen && !mondayMinimized && (
+          <WindowFrame 
+            title="monday.com | Work OS" 
+            icon={<Calendar className="w-4 h-4" />} 
+            onClose={() => setMondayOpen(false)} 
+            onMinimize={() => setMondayMinimized(true)}
+            zIndex={mondayZ}
+            onFocus={() => focusWindow('monday')}
+            defaultWidth={1100}
+            defaultHeight={800}
+          >
+            <MondayApp />
+          </WindowFrame>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {ekyteOpen && !ekyteMinimized && (
+          <WindowFrame 
+            title="eKyte | DMM & Performance" 
+            icon={<Trello className="w-4 h-4" />} 
+            onClose={() => setEkyteOpen(false)} 
+            onMinimize={() => setEkyteMinimized(true)}
+            zIndex={ekyteZ}
+            onFocus={() => focusWindow('ekyte')}
+            defaultWidth={1100}
+            defaultHeight={800}
+          >
+            <EKyteApp />
+          </WindowFrame>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {rdStationOpen && !rdStationMinimized && (
+          <WindowFrame 
+            title="RD Station | Funnel & Marketing" 
+            icon={<Rocket className="w-4 h-4" />} 
+            onClose={() => setRdStationOpen(false)} 
+            onMinimize={() => setRdStationMinimized(true)}
+            zIndex={rdStationZ}
+            onFocus={() => focusWindow('rd_station')}
+            defaultWidth={1100}
+            defaultHeight={800}
+          >
+            <RDStationApp />
+          </WindowFrame>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {treasyOpen && !treasyMinimized && (
+          <WindowFrame 
+            title="Treasy | Controllership & BI" 
+            icon={<Landmark className="w-4 h-4" />} 
+            onClose={() => setTreasyOpen(false)} 
+            onMinimize={() => setTreasyMinimized(true)}
+            zIndex={treasyZ}
+            onFocus={() => focusWindow('treasy')}
+            defaultWidth={1100}
+            defaultHeight={800}
+          >
+            <TreasyApp />
+          </WindowFrame>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {mentorOpen && !mentorMinimized && (
+          <WindowFrame 
+            title="MentorWeb | Governance" 
+            icon={<Network className="w-4 h-4" />} 
+            onClose={() => setMentorOpen(false)} 
+            onMinimize={() => setMentorMinimized(true)}
+            zIndex={mentorZ}
+            onFocus={() => focusWindow('mentor')}
+            defaultWidth={1100}
+            defaultHeight={800}
+          >
+            <MentorWebApp />
+          </WindowFrame>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {mindOpen && !mindMinimized && (
+          <WindowFrame 
+            title="Komvos Mind | AI Awareness" 
+            icon={<Brain className="w-4 h-4" />} 
+            onClose={() => setMindOpen(false)} 
+            onMinimize={() => setMindMinimized(true)}
+            zIndex={mindZ}
+            onFocus={() => focusWindow('mind')}
+            defaultWidth={1000}
+            defaultHeight={700}
+          >
+            <KomvosMindApp />
+          </WindowFrame>
+        )}
+      </AnimatePresence>
+
     </div>
   );
 }
